@@ -1,0 +1,49 @@
+.navbar-container {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .navbar-tabs {
+    display: flex;
+    justify-content: center;
+    
+  }
+  
+  .navbar-tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: orange;
+    position: relative;
+  }
+  
+  .navbar-tab.active {
+    color: #0056d2; /* Blue color for active tab */
+  }
+  
+  .navbar-tab.active:after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #0056d2; /* Blue underline for active tab */
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+  }
+  
+  .navbar-content {
+    margin-top: 25px;
+  }
+  
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+  }
+  .content img{
+    height: 120px;
+  }
+ 

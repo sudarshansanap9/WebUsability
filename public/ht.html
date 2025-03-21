@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usability Dashboard - But Make It Fun!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/compromise"></script>
+</head>
+<body class="bg-gray-100 text-gray-900 p-6 transition-all duration-500" id="body">
+    <div class="max-w-6xl mx-auto">
+        <div class="flex justify-between items-center mb-4">
+            <button id="toggle-dark" class="p-2 bg-gray-800 text-white rounded hover:bg-gray-600 transition">🌙 Dark Mode</button>
+            <h1 class="text-3xl font-bold text-center flex-1 animate-bounce">📊 The Ultimate Usability Dashboard 🚀</h1>
+        </div>
+
+        <div id="dashboard" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mt-6">
+            <div class="col-span-12 md:col-span-6 bg-white shadow-lg p-4 rounded-lg">
+                <h2 class="text-xl font-bold mb-2">🔥 Performance Heatmap</h2>
+                <canvas id="heatmapChart"></canvas>
+            </div>
+
+            <div id="chatbot" class="col-span-12 md:col-span-6 p-4 bg-gray-200 shadow-lg rounded-lg">
+                <h2 class="text-xl font-bold text-red-600">🤖 Chatbot Assistant</h2>
+                <div id="chat-output" class="h-40 overflow-y-auto p-2 bg-white border rounded"></div>
+                <input id="chat-input" type="text" placeholder="Ask something cool..." class="p-2 border rounded w-full mt-2">
+                <button id="send-button" class="mt-2 p-2 bg-blue-600 text-white rounded hover:bg-blue-500 transition">Send 🚀</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function fetchData() {
+            try {
+                const response = await fetch('ai_response.json');
+                return await response.json();
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                return {};
+            }
+        }
+
+        async function renderDashboard() {
+            const data = await fetchData();
+            const dashboard = document.getElementById("dashboard");
+            dashboard.innerHTML = "";
+            
+            Object.entries(data).forEach(([category, info]) => {
+                const card = document.createElement("div");
+                card.className = "p-4 bg-white shadow-lg rounded-lg hover:scale-105 transition-all duration-300";
+                card.innerHTML = `
+                    <h2 class="text-xl font-bold mb-2">🧐 ${category}</h2>
+                    <p>${info.Overview}</p>
+                    <canvas id="chart-${category}"></canvas>
+                    <ul id="improvements-${category}" class="list-disc pl-6 mt-2 text-sm text-gray-700"></ul>
+                `;
+                dashboard.appendChild(card);
+                setTimeout(() => {
+                    renderPieChart(category, info.Score);
+                    displayImprovements(category, info);
+                }, 100);
+            });
+        }
+
+        function renderPieChart(category, score) {
+            const ctx = document.getElementById(`chart-${category}`).getContext("2d");
+            new Chart(ctx, {
+                type: "doughnut",
+                data: {
+                    labels: ["Score", "Remaining"],
+                    datasets: [{ data: [score, 100 - score], backgroundColor: ["#4F46E5", "#E5E7EB"] }]
+                },
+                options: { responsive: false, cutout: "70%" }
+            });
+        }
+
+        function displayImprovements(category, info) {
+            const improvementsList = document.getElementById(`improvements-${category}`);
+            improvementsList.innerHTML = info.Improvements.length > 0
+                ? info.Improvements.map(i => `<li>💡 ${i}</li>`).join(" ")
+                : "<li>No specific improvements listed. 😎</li>";
+        }
+
+        async function renderHeatmap() {
+            const data = await fetchData();
+            const heatmapCtx = document.getElementById("heatmapChart").getContext("2d");
+            new Chart(heatmapCtx, {
+                type: "bar",
+                data: {
+                    labels: Object.keys(data.Performance.KeyMetrics),
+                    datasets: [{
+                        label: "Performance Metrics",
+                        data: Object.values(data.Performance.KeyMetrics).map(m => m.value),
+                        backgroundColor: "#FF5733"
+                    }]
+                },
+                options: { responsive: true }
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            const data = await fetchData();
+            const chatInput = document.getElementById("chat-input");
+            const chatOutput = document.getElementById("chat-output");
+            const sendButton = document.getElementById("send-button");
+            
+            sendButton.addEventListener("click", () => {
+                const userInput = chatInput.value.trim();
+                if (userInput && data[userInput]) {
+                    const suggestions = data[userInput].Improvements.length > 0 ? data[userInput].Improvements.join(", ") : "No specific improvements available.";
+                    chatOutput.innerHTML += `<p><strong>😎 You:</strong> ${userInput}</p>`;
+                    chatOutput.innerHTML += `<p><strong>🤖 Bot:</strong> ${suggestions}</p>`;
+                    chatInput.value = "";
+                } else {
+                    chatOutput.innerHTML += `<p><strong>🤖 Bot:</strong> Uh-oh! I have no idea! Try something else! 😅</p>`;
+                }
+            });
+        });
+
+        document.getElementById("toggle-dark").addEventListener("click", () => {
+            document.body.classList.toggle("bg-gray-900");
+            document.body.classList.toggle("text-white");
+            localStorage.setItem("darkMode", document.body.classList.contains("bg-gray-900"));
+        });
+
+        if (localStorage.getItem("darkMode") === "true") {
+            document.body.classList.add("bg-gray-900", "text-white");
+        }
+
+        renderDashboard();
+        renderHeatmap();
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+{
+  "Performance": {
+    "Score": 85,
+    "Overview": "YouTube is zippy but can zip even zippier with tweaks!",
+    "KeyMetrics": {
+      "First Contentful Paint (FCP)": {
+        "value": 1.2,
+        "unit": "s",
+        "description": "The time when you first see a splash of content. The quicker, the better, 'cause waiting is so last year."
+      },
+      "Speed Index": {
+        "value": 3.4,
+        "unit": "s",
+        "description": "This index shows how quickly content populates. Imagine filling a pool; faster fill, cooler swim!"
+      },
+      "Largest Contentful Paint (LCP)": {
+        "value": 2.8,
+        "unit": "s",
+        "description": "The big moment when the largest content piece loads. It's like waiting for the main dish at a feast!"
+      },
+      "Time to Interactive (TTI)": {
+        "value": 4.5,
+        "unit": "s",
+        "description": "How long till you can click and scroll without lag. It’s like waiting to jump into a double Dutch game."
+      },
+      "Total Blocking Time (TBT)": {
+        "value": 310,
+        "unit": "ms",
+        "description": "The total time other tasks block the main thread. Less block time, more rock time!"
+      }
+    },
+    "Improvements": [
+      "Fix image sizes",
+      "Remove unused JS",
+      "Lazy load images"
+    ]
+  },
+  "Accessibility": {
+    "Score": 78,
+    "Overview": "YouTube’s accessible, but could be better for everyone!",
+    "KeyIssues": {
+      "Alt Text": "Images need words for the screen-reader squad.",
+      "Contrast": "Low contrast is a no-go for low vision peeps."
+    },
+    "Improvements": [
+      "Fix contrast",
+      "Add alt text"
+    ]
+  },
+  "BestPractices": {
+    "Score": 88,
+    "Overview": "YouTube’s good on practices, but nobody's perfect!",
+    "KeyIssues": {
+      "HTTPS": "Secure sites are lit. Keep it locked down!",
+      "Console Errors": "Errors in the console are like typos in your texts. Clean it up!"
+    },
+    "Improvements": [
+      "Use HTTPS",
+      "Fix errors"
+    ]
+  },
+  "SEO": {
+    "Score": 90,
+    "Overview": "YouTube’s SEO game is strong, but there’s room for more!",
+    "KeyIssues": {
+      "Meta Description": "Meta tags are like the trailer for your page. Make it enticing!",
+      "Crawlable Links": "If bots can’t crawl, they can’t index. Make links friendly!"
+    },
+    "Improvements": [
+      "Add meta descriptions",
+      "Make links crawlable"
+    ]
+  }
+}
