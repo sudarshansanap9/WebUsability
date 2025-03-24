@@ -1,0 +1,108 @@
+{
+  "Performance": {
+    "Score": 85,
+    "Overview": "Hashnode's site zooms like a sports car, giving you the deets fast!",
+    "KeyMetrics": {
+      "First Contentful Paint (FCP)": {
+        "value": 1.3,
+        "unit": "s",
+        "description": "That's how long until the first text or image is painted. Speedy, huh?"
+      },
+      "Speed Index": {
+        "value": 2.4,
+        "unit": "s",
+        "description": "Shows how quickly the content is visually displayed. Flashy fast!"
+      },
+      "Largest Contentful Paint (LCP)": {
+        "value": 2.5,
+        "unit": "s",
+        "description": "This is the big showstopper element loading time. A blink and you'll miss it!"
+      },
+      "Time to Interactive (TTI)": {
+        "value": 3.8,
+        "unit": "s",
+        "description": "The time it takes for the site to become fully interactive. Almost like instant messaging!"
+      },
+      "Total Blocking Time (TBT)": {
+        "value": 300,
+        "unit": "ms",
+        "description": "This is the total time that the page is blocked from user input. Short and sweet!"
+      }
+    },
+    "Improvements": [
+      "Fix image sizes",
+      "Remove unused JS",
+      "Lazy load images"
+    ]
+  },
+  "Accessibility": {
+    "Score": 92,
+    "Overview": "Navigating Hashnode is a breeze, even with accessibility tools!",
+    "KeyMetrics": {
+      "Alt Text": "Hashnode rocks at providing descriptive text for images. Helps screen readers big time!",
+      "Contrast": "Their text stands out against the background, making everything easy on the eyes."
+    },
+    "Improvements": [
+      "Fix contrast",
+      "Add alt text"
+    ]
+  },
+  "BestPractices": {
+    "Score": 88,
+    "Overview": "Hashnode follows the digital rulebook to a T!",
+    "KeyMetrics": {
+      "HTTPS": "Secure as a vault! Hashnode uses HTTPS to keep your data safe.",
+      "Console Errors": "Clean as a whistle, no major errors messing up the vibe."
+    },
+    "Improvements": [
+      "Use HTTPS",
+      "Fix errors"
+    ]
+  },
+  "SEO": {
+    "Score": 91,
+    "Overview": "Hashnode's SEO game is strong, helping it climb the Google ranks!",
+    "KeyMetrics": {
+      "Meta Description": "Spot-on descriptions that make you wanna click.",
+      "Crawlable Links": "All links are crawlable, making it a playground for search engines."
+    },
+    "Improvements": [
+      "Add meta descriptions",
+      "Make links crawlable"
+    ]
+  },
+  "Readability": {
+    "Score": 87,
+    "Overview": "Hashnode articles are a smooth read, keeping you hooked!",
+    "KeyMetrics": {
+      "Readability Score": "Sentences flow like a river, easy and clear to understand."
+    },
+    "Improvements": [
+      "Shorten long paragraphs",
+      "Use more headings"
+    ]
+  },
+  "Images": {
+    "Score": 90,
+    "Overview": "Hashnode's images are eye candy and well optimized!",
+    "KeyMetrics": {
+      "Image Alt Text": "Each image comes with a catchy caption to tell you what's up.",
+      "Image Size": "Images are optimized to not drag down the speed. Snap and load!"
+    },
+    "Improvements": [
+      "Add alt text",
+      "Optimize image size"
+    ]
+  },
+  "Busniess Scope": {
+    "Score": 85,
+    "Overview": "Hashnode nails it in addressing its business audience effectively!",
+    "KeyMetrics": {
+      "Business Scope": "Covers a wide array of tech topics, from coding to product management."
+    },
+    "Improvements": [
+      "Expand business topics",
+      "Increase industry expert contributions"
+    ]
+  }
+}

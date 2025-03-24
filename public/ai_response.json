@@ -1,32 +1,32 @@
 {
   "Performance": {
-    "Score": 85,
-    "Overview": "YouTube is zippy but can zip even zippier with tweaks!",
+    "Score": 0,
+    "Overview": "Fun and engaging summary about site speed",
     "KeyMetrics": {
       "First Contentful Paint (FCP)": {
-        "value": 1.2,
+        "value": 0,
         "unit": "s",
-        "description": "The time when you first see a splash of content. The quicker, the better, 'cause waiting is so last year."
+        "description": "Cool Gen-Z explanation"
       },
       "Speed Index": {
-        "value": 3.4,
+        "value": 0,
         "unit": "s",
-        "description": "This index shows how quickly content populates. Imagine filling a pool; faster fill, cooler swim!"
+        "description": "Cool Gen-Z explanation"
       },
       "Largest Contentful Paint (LCP)": {
-        "value": 2.8,
+        "value": 0,
         "unit": "s",
-        "description": "The big moment when the largest content piece loads. It's like waiting for the main dish at a feast!"
+        "description": "Cool Gen-Z explanation"
       },
       "Time to Interactive (TTI)": {
-        "value": 4.5,
+        "value": 0,
         "unit": "s",
-        "description": "How long till you can click and scroll without lag. It’s like waiting to jump into a double Dutch game."
+        "description": "Cool Gen-Z explanation"
       },
       "Total Blocking Time (TBT)": {
-        "value": 310,
+        "value": 0,
         "unit": "ms",
-        "description": "The total time other tasks block the main thread. Less block time, more rock time!"
+        "description": "Cool Gen-Z explanation"
       }
     },
     "Improvements": [
@@ -36,11 +36,11 @@
     ]
   },
   "Accessibility": {
-    "Score": 78,
-    "Overview": "YouTube’s accessible, but could be better for everyone!",
+    "Score": 0,
+    "Overview": "Fun summary about accessibility issues",
     "KeyIssues": {
-      "Alt Text": "Images need words for the screen-reader squad.",
-      "Contrast": "Low contrast is a no-go for low vision peeps."
+      "Alt Text": "Cool Gen-Z explanation",
+      "Contrast": "Cool Gen-Z explanation"
     },
     "Improvements": [
       "Fix contrast",
@@ -48,11 +48,11 @@
     ]
   },
   "BestPractices": {
-    "Score": 88,
-    "Overview": "YouTube’s good on practices, but nobody's perfect!",
+    "Score": 0,
+    "Overview": "Fun summary about best practices",
     "KeyIssues": {
-      "HTTPS": "Secure sites are lit. Keep it locked down!",
-      "Console Errors": "Errors in the console are like typos in your texts. Clean it up!"
+      "HTTPS": "Cool Gen-Z explanation",
+      "Console Errors": "Cool Gen-Z explanation"
     },
     "Improvements": [
       "Use HTTPS",
@@ -60,11 +60,11 @@
     ]
   },
   "SEO": {
-    "Score": 90,
-    "Overview": "YouTube’s SEO game is strong, but there’s room for more!",
+    "Score": 0,
+    "Overview": "Fun summary about SEO",
     "KeyIssues": {
-      "Meta Description": "Meta tags are like the trailer for your page. Make it enticing!",
-      "Crawlable Links": "If bots can’t crawl, they can’t index. Make links friendly!"
+      "Meta Description": "Cool Gen-Z explanation",
+      "Crawlable Links": "Cool Gen-Z explanation"
     },
     "Improvements": [
       "Add meta descriptions",

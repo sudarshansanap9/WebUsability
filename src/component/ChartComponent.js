@@ -2,7 +2,8 @@ import React from "react";
 
 const SearchButton = () => {
   const handleSearchClick = () => {
-    window.open("/ht.html", "_blank");
+    const url = document.getElementById("url").value;
+    window.open(`/ht.html?url=${url}`, "_blank");
   };
 
   return (

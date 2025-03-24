@@ -23,20 +23,31 @@
                 <canvas id="heatmapChart"></canvas>
             </div>
 
-            <div id="chatbot" class="col-span-12 md:col-span-6 p-4 bg-gray-200 shadow-lg rounded-lg">
-                <h2 class="text-xl font-bold text-red-600">🤖 Chatbot Assistant</h2>
-                <div id="chat-output" class="h-40 overflow-y-auto p-2 bg-white border rounded"></div>
-                <input id="chat-input" type="text" placeholder="Ask something cool..." class="p-2 border rounded w-full mt-2">
-                <button id="send-button" class="mt-2 p-2 bg-blue-600 text-white rounded hover:bg-blue-500 transition">Send 🚀</button>
+            <div class="col-span-12 md:col-span-6 bg-white shadow-lg p-4 rounded-lg">
+                <h2 class="text-xl font-bold mb-2">📈 Performance Trends</h2>
+                <canvas id="lineChart"></canvas>
             </div>
+
         </div>
     </div>
 
     <script>
+        let data = {};
         async function fetchData() {
             try {
-                const response = await fetch('ai_response.json');
-                return await response.json();
+                const urlParams = new URLSearchParams(window.location.search);
+                console.log(urlParams)
+
+                const url = urlParams.get('url');
+
+                console.log(url)
+                console.log("Making request to backend");
+
+                const response = await fetch(`http://localhost:3001/audit?url=${url}`);
+                console.log("Returned Response: ",response)
+
+                const jsonResponse = await response.json();
+                return jsonResponse.structuredResponse;
             } catch (error) {
                 console.error("Error fetching data:", error);
                 return {};
@@ -44,10 +55,20 @@
         }
 
         async function renderDashboard() {
-            const data = await fetchData();
+            // Show loading spinner
             const dashboard = document.getElementById("dashboard");
-            dashboard.innerHTML = "";
+            dashboard.innerHTML = `
+                <div class="col-span-3 flex justify-center items-center">
+                    <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-500"></div>
+                    <p class="ml-4 text-lg">Loading analysis...</p>
+                </div>
+            `;
             
+            data = await fetchData();
+            console.log("Data: ",data)
+
+            dashboard.innerHTML = " ";
+
             Object.entries(data).forEach(([category, info]) => {
                 const card = document.createElement("div");
                 card.className = "p-4 bg-white shadow-lg rounded-lg hover:scale-105 transition-all duration-300";
@@ -63,6 +84,12 @@
                     displayImprovements(category, info);
                 }, 100);
             });
+
+            // Render heatmap after data is loaded
+            if (data.Performance && data.Performance.KeyMetrics) {
+                renderHeatmap();
+                renderLineGraph();
+            }
         }
 
         function renderPieChart(category, score) {
@@ -85,7 +112,6 @@
         }
 
         async function renderHeatmap() {
-            const data = await fetchData();
             const heatmapCtx = document.getElementById("heatmapChart").getContext("2d");
             new Chart(heatmapCtx, {
                 type: "bar",
@@ -101,24 +127,62 @@
             });
         }
 
-        document.addEventListener("DOMContentLoaded", async () => {
-            const data = await fetchData();
-            const chatInput = document.getElementById("chat-input");
-            const chatOutput = document.getElementById("chat-output");
-            const sendButton = document.getElementById("send-button");
+        async function renderLineGraph() {
+            const lineCtx = document.getElementById("lineChart").getContext("2d");
             
-            sendButton.addEventListener("click", () => {
-                const userInput = chatInput.value.trim();
-                if (userInput && data[userInput]) {
-                    const suggestions = data[userInput].Improvements.length > 0 ? data[userInput].Improvements.join(", ") : "No specific improvements available.";
-                    chatOutput.innerHTML += `<p><strong>😎 You:</strong> ${userInput}</p>`;
-                    chatOutput.innerHTML += `<p><strong>🤖 Bot:</strong> ${suggestions}</p>`;
-                    chatInput.value = "";
-                } else {
-                    chatOutput.innerHTML += `<p><strong>🤖 Bot:</strong> Uh-oh! I have no idea! Try something else! 😅</p>`;
+            // Extract scores from all categories in data
+            const scores = [];
+            const categories = [];
+            
+            // Crawl through data object to get scores from each category
+            for (const category in data) {
+                if (data[category] && typeof data[category].Score === 'number') {
+                    categories.push(category);
+                    scores.push(data[category].Score);
+                }
+            }
+            
+            new Chart(lineCtx, {
+                type: "line",
+                data: {
+                    labels: categories,
+                    datasets: [{
+                        label: "Category Scores",
+                        data: scores,
+                        borderColor: "#4F46E5",
+                        backgroundColor: "rgba(79, 70, 229, 0.1)",
+                        tension: 0.4,
+                        fill: true,
+                        pointBackgroundColor: "#4F46E5",
+                        pointRadius: 6,
+                        pointHoverRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                callback: value => `${value}%`
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: "top"
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: context => `Score: ${context.parsed.y}%`
+                            }
+                        }
+                    }
                 }
             });
-        });
+        }
 
         document.getElementById("toggle-dark").addEventListener("click", () => {
             document.body.classList.toggle("bg-gray-900");
@@ -131,7 +195,6 @@
         }
 
         renderDashboard();
-        renderHeatmap();
     </script>
 </body>
 </html>

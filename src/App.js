@@ -14,12 +14,10 @@ const App = () => {
       </video>
       <div className="content">
       
-        
         <Homepage />
         <SmallNavbar />
-     <div className='text-center pt-3'><ChartComponent/></div>
-     
-     
+        <div className='text-center pt-3'><ChartComponent/></div>
+
       </div>
     </div>
   );

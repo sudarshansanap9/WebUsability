@@ -37,6 +37,7 @@ const SmallNavbar = () => {
           <div className="content " >
             <img src={UrlIcon} alt="URL Icon" />
             <input 
+              id='url'
               type="text"
               placeholder="Search or scan a URL"
             style={{width:'50%', borderRadius:'10px',padding:'10px'}}/>
